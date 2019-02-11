@@ -1,0 +1,12 @@
+<xf:title>{{ phrase('faq_ask_question') }}</xf:title>
+
+<xf:form action="{{ link('help/faq/ask') }}" class="block" ajax="true" upload="true" data-skip-overlay-redirect="true">
+	<div class="block-container">
+		<div class="block-body">
+			<xf:textboxrow name="question" value="" label="{{ phrase('faq_your_question') }}" placeholder="{{ phrase('faq_ask_your_question') }}" fa="fa-pencil">
+				<xf:explain>{{ phrase('faq_ask_question_explain') }}</xf:explain>
+			</xf:textboxrow>
+		</div>
+		<xf:submitrow icon="save" overlay="true" sticky="true" data-follow-redirects="true" data-force-flash-message="true"/>
+	</div>
+</xf:form>

@@ -1,0 +1,26 @@
+<xf:macro name="reaction_snippet" arg-reactionUser="!" arg-reactionId="!" arg-update="!" arg-date="!" arg-fallbackName="{{ phrase('unknown_member') }}">
+	<div class="contentRow-title">
+		<xf:if is="$update.user_id == $xf.visitor.user_id">
+				{{ phrase('faq_x_reacted_to_answer_y', {
+					'name': username_link($reactionUser, false, {'defaultname': $fallbackName}),
+					'title': '<a href="' . link('help/faq', $update) . '">' . $update.question . '</a>',
+					'reaction': alert_reaction($reactionId)|preescaped
+				}) }}
+		<xf:else />
+				{{ phrase('faq_x_reacted_to_ys_answer_z', {
+					'name': username_link($reactionUser, false, {'defaultname': $fallbackName}),
+					'author': $update.username,
+					'title': '<a href="' . link('help/faq', $update) . '">' . $update.question . '</a>',
+					'reaction': alert_reaction($reactionId)|preescaped
+				}) }}
+		</xf:if>
+	</div>
+
+	<div class="contentRow-snippet">{{
+		snippet($update.message, $xf.options.newsFeedMessageSnippetLength, {'stripQuote': true})
+	}}</div>
+
+	<div class="contentRow-minor"><xf:date time="{$date}" /></div>
+</xf:macro>
+
+<xf:macro name="reaction_snippet" arg-reactionUser="{$reaction.ReactionUser}" arg-reactionId="{$reaction.reaction_id}" arg-update="{$content}" arg-date="{$reaction.reaction_date}" />

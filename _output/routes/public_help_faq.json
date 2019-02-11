@@ -1,0 +1,11 @@
+{
+    "route_type": "public",
+    "route_prefix": "help",
+    "sub_name": "faq",
+    "format": "faq/:int<faq_id,question>/",
+    "build_class": "Shriker\\Faq\\Pub\\Route\\Question",
+    "build_method": "build",
+    "controller": "Shriker\\Faq\\Pub\\Controller\\Question",
+    "context": "",
+    "action_prefix": ""
+}

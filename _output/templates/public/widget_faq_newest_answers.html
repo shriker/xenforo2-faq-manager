@@ -1,0 +1,51 @@
+<xf:if is="$questions is not empty OR ($questions is empty AND $filter != 'latest')">
+	<div class="block"{{ widget_data($widget) }}>
+		<div class="block-container">
+			<xf:if is="$style == 'full'">
+				<h3 class="block-header">
+					<a href="{$link}" rel="nofollow">{$title}</a>
+				</h3>
+				<div class="block-body">
+					<div class="structItemContainer">
+						<xf:if is="$threads is not empty">
+							<xf:foreach loop="$questions" value="$question">
+								<xf:macro template="thread_list_macros" name="item"
+									arg-allowInlineMod="{{ false }}"
+									arg-thread="{$thread}" />
+							</xf:foreach>
+						<xf:else />
+							<div class="block-row">
+								{{ phrase('no_results_found') }}
+							</div>
+						</xf:if>
+					</div>
+				</div>
+				<xf:if is="$hasMore">
+					<div class="block-footer">
+						<span class="block-footer-controls">
+							<xf:button href="{$link}" rel="nofollow">{{ phrase('view_more...') }}</xf:button>
+						</span>
+					</div>
+				</xf:if>
+			<xf:else />
+				<h3 class="block-minorHeader">
+					<a href="{$link}" rel="nofollow">{$title}</a>
+				</h3>
+				<ul class="block-body">
+					<xf:if is="$questions is not empty">
+						<xf:foreach loop="$questions" value="$question">
+							<li class="block-row">
+								<xf:macro template="thread_list_macros" name="item_new_posts"
+									arg-thread="{$thread}" />
+							</li>
+						</xf:foreach>
+					<xf:else />
+						<li class="block-row block-row--minor">
+							{{ phrase('no_results_found') }}
+						</li>
+					</xf:if>
+				</ul>
+			</xf:if>
+		</div>
+	</div>
+</xf:if>

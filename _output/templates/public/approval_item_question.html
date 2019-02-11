@@ -1,0 +1,17 @@
+<xf:set var="$messageHtml">
+	<h4 class="message-title">{{ phrase('faq_question') }}: <a href="{{ link('help/faq', $content) }}">{$content.question}</a></h4>
+</xf:set>
+
+<xf:macro template="approval_queue_macros" name="item_message_type"
+	arg-content="{$content}"
+	arg-user="{$content.User}"
+	arg-messageHtml="{{ $messageHtml }}"
+	arg-typePhraseHtml="{{ phrase('faq_question') }}"
+	arg-spamDetails="{$spamDetails}"
+    arg-contentDate="{$content.submit_date}"
+	arg-unapprovedItem="{$unapprovedItem}"
+	arg-handler="{$handler}"
+	arg-headerPhraseHtml="{{ phrase('faq_question_x_asked_the_question', {
+		'faqLink': link('help/faq', $content),
+		'faqQuestion': $content.question
+	}) }}" />

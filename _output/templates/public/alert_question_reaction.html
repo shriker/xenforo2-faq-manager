@@ -1,0 +1,5 @@
+{{ phrase('faq_x_reacted_to_answer_y', {
+	'name': username_link($user, false, {'defaultname': $alert.username}),
+	'title': '<a href="' . link('help/faq', $content) . '" class="fauxBlockLink-blockLink">' . $content.question . '</a>',
+	'reaction': alert_reaction($extra.reaction_id)|preescaped
+}) }}

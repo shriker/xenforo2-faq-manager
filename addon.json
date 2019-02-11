@@ -1,0 +1,22 @@
+{
+    "legacy_addon_id": "Iversia/FAQ",
+    "title": "FAQ Manager",
+    "description": "XenForo 2 addon for Frequently Asked Questions management.",
+    "version_id": 10001,
+    "version_string": "1.0.0 Alpha",
+    "dev": "Jodie Struthers",
+    "dev_url": "https://shriker.ca",
+    "faq_url": "https://github.com/shriker/xenforo2-faq-manager",
+    "support_url": "https://github.com/shriker/xenforo2-faq-manager/issues",
+    "extra_urls": {
+        "Join my exclusive community ☄️" : "https://www.patreon.com/shriker",
+        "Fuel me with coffee ☕": "https://ko-fi.com/shriker"
+    },
+    "require": {
+        "XF": [
+            2010010,
+            "XenForo 2.1.0+"
+        ]
+    },
+    "icon": "fa-question"
+}

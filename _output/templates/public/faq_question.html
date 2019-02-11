@@ -1,0 +1,104 @@
+<xf:title>{{ $question.question }}</xf:title>
+
+
+<xf:set var="$descSnippet" value="{{ snippet($question.answer, 250, {'stripBbCode': true}) }}" />
+
+<xf:macro template="metadata_macros" name="metadata"
+		  arg-description="{$descSnippet}"
+		  arg-shareUrl="{{ link('canonical:help/faq', $question) }}"
+		  arg-canonicalUrl="{{ link('canonical:help/faq', $question) }}" />
+
+<xf:page option="ldJsonHtml">
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "Question",
+		"@id": "{{ link('canonical:help/faq', $question)|escape('json') }}",
+		"headline": "{$question.question|escape('json')}",
+        "description": "{$descSnippet|escape('json')}",
+        "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "{$question.answer|escape('json')}"
+        },
+        "answerCount": 1
+	}
+	</script>
+</xf:page>
+
+<xf:breadcrumb href="{{ link('help') }}">{{ phrase('help') }}</xf:breadcrumb>
+<xf:breadcrumb href="{{ link('help/faq') }}">{{ phrase('help_page_title.faq') }}</xf:breadcrumb>
+
+<xf:wrap template="help_wrapper" />
+<xf:css src="message.less" />
+<xf:css src="structured_list.less" />
+
+<div class="block" data-type="question">
+	<div class="block-outer">
+		<div class="block-container">
+			<div class="block-body lbContainer js-questionBody"
+				 data-xf-init="lightbox"
+				 data-lb-id="question-{$question.faq_id}">
+				<article class="block-body block-row">
+					<span class="u-anchorTarget" id="post-{$question.faq_id}"></span>
+
+					<header class="message-attribution message-attribution--split">
+						<div class="message-attribution-main">
+							<a href="{{ link('help/faq', $question, {'faq_id': $question.faq_id}) }}" class="u-concealed"
+							   rel="nofollow">
+								<xf:date time="{$question.answer_date}"/>
+							</a>
+						</div>
+						<ul class="message-attribution-opposite message-attribution-opposite--list">
+							<li>
+								<a href="{{ link('help/faq', $question, {'faq_id': $question.faq_id}) }}"
+								   data-xf-init="share-tooltip" data-href="{{ link('help/faq/share', $question) }}"
+								   rel="nofollow">
+									<xf:fa icon="fa-share-alt"/>
+								</a>
+							</li>
+							<xf:if is="!$hidePosition">
+								<li>
+									<a href="{{ link('help/faq', $question, {'faq_id': $question.faq_id}) }}" rel="nofollow">
+										#{{ number($question.faq_id) }}
+									</a>
+								</li>
+							</xf:if>
+						</ul>
+					</header>
+
+					<div class="message-body">
+						{{ bb_code($question.answer, 'question', $question) }}
+					</div>
+
+					<xf:if is="$question.attach_count">
+						<xf:macro template="message_macros" name="attachments"
+								  arg-attachments="{$question.Attachments}"
+								  arg-message="{$question}"
+								  arg-canView="{{ true }}" />
+					</xf:if>
+
+					<footer class="message-footer">
+						<div class="message-actionBar actionBar">
+							<xf:if contentcheck="true">
+								<div class="actionBar-set actionBar-set--external">
+									<xf:contentcheck>
+										<xf:react content="{$question}" link="help/faq/react" list="< .js-post | .js-reactionsList" />
+									</xf:contentcheck>
+								</div>
+							</xf:if>
+						</div>
+						<div class="reactionsBar js-reactionsList {{ $question.reactions ? 'is-active' : '' }}">
+							<xf:reactions content="{$question}" link="help/faq/reactions" />
+						</div>
+						<div class="js-historyTarget toggleTarget" data-href="trigger-href"></div>
+					</footer>
+
+				</article>
+			</div>
+		</div>
+	</div>
+
+	<div class="blockMessage blockMessage--none">
+		<xf:macro template="share_page_macros" name="buttons" arg-iconic="{{ true }}" arg-label="{{ phrase('share:') }}" />
+	</div>
+</div>

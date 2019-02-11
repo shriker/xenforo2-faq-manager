@@ -1,0 +1,5 @@
+{
+    "content_type": "question",
+    "field_name": "approval_queue_handler_class",
+    "field_value": "Shriker\\Faq\\ApprovalQueue\\Question"
+}

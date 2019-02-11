@@ -1,0 +1,73 @@
+<xf:title>{{ phrase('help_page_title.faq') }}</xf:title>
+
+<xf:breadcrumb href="{{ link('help') }}">{{ phrase('help') }}</xf:breadcrumb>
+
+<xf:wrap template="help_wrapper" />
+<xf:css src="structured_list.less" />
+
+<xf:pageaction if="$xf.visitor.canAskQuestion()">
+	<xf:button href="{{ link('help/faq/ask') }}" class="button--cta" icon="write" overlay="true">{{ phrase('faq_ask_question') }}</xf:button>
+</xf:pageaction>
+
+<div class="block" data-type="faq" data-href="{{ link('inline-mod') }}">
+	<div class="block-outer"><xf:trim>
+
+		<xf:pagenav page="{$page}" perpage="{$perPage}" total="{$total}"
+					link="help/faq" params="{$filters}"
+					wrapperclass="block-outer-main" />
+
+		<xf:if contentcheck="true">
+			<div class="block-outer-opposite">
+				<div class="buttonGroup">
+					<xf:contentcheck>
+						<xf:if is="$canInlineMod">
+							<xf:macro template="inline_mod_macros" name="button" />
+						</xf:if>
+					</xf:contentcheck>
+				</div>
+			</div>
+		</xf:if>
+
+		</xf:trim></div>
+
+	<div class="block-container">
+		<div class="block-body">
+			<xf:if is="$questions is not empty">
+				<div class="structItemContainer">
+					<xf:foreach loop="$questions" value="$question">
+
+						<div class="structItem structItem--faq">
+							<div class="structItem-cell structItem-cell--icon structItem-cell--iconExpanded">
+								<div class="structItem-iconContainer">	
+								</div>
+								<div class="structItem-cell structItem-cell--main" data-xf-init="touch-proxy">
+									<a href="{{ link('help/faq', $question) }}">{{ $question.question }}</a>
+								</div>
+							</div>
+						</div>
+
+
+					</xf:foreach>
+				</div>
+				<xf:elseif is="$filters" />
+				<div class="block-row">{{ phrase('faq_there_no_questions_matching_your_filters') }}</div>
+				<xf:else />
+				<div class="block-row">{{ phrase('faq_no_questions_have_been_created_yet') }}</div>
+			</xf:if>
+		</div>
+	</div>
+
+	<div class="block-outer block-outer--after">
+		<xf:pagenav
+					page="{$page}" perpage="{$perPage}" total="{$total}"
+					link="help/faq" params="{$filters}"
+					wrapperclass="block-outer-main" />
+		<xf:showignored wrapperclass="block-outer-opposite" />
+	</div>
+</div>
+
+<xf:page option="sideNavTitle">{{ phrase('categories') }}</xf:page>
+
+<xf:sidenav>
+</xf:sidenav>
+<xf:widgetpos id="faq_overview_sidenav" position="sidenav" />

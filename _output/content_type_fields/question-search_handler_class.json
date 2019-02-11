@@ -1,0 +1,5 @@
+{
+    "content_type": "question",
+    "field_name": "search_handler_class",
+    "field_value": "Shriker\\Faq\\Search\\Data\\Question"
+}

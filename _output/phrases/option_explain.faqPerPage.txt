@@ -1,0 +1,1 @@
+This controls the maximum number of questions that will be shown on one page at a time.

@@ -1,0 +1,1 @@
+Displays a block containing FAQ answers that you have marked as sticky.

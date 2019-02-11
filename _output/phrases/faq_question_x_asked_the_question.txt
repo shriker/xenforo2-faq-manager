@@ -1,0 +1,1 @@
+Asked the question: <a href="{faqLink}">{faqQuestion}</a>

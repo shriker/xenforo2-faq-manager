@@ -1,0 +1,26 @@
+<li class="block-row block-row--separated {{ $question.isIgnored() ? 'is-ignored' : '' }} js-inlineModContainer" data-author="{{ $question.User.username ?: $question.username }}">
+	<div class="contentRow {{ !$question.isVisible() ? 'is-deleted' : '' }}">
+		<span class="contentRow-figure">
+			<xf:avatar user="{$question.User}" size="s" defaultname="{$question.username}" />
+		</span>
+		<div class="contentRow-main">
+			<h3 class="contentRow-title">
+				<a href="{{ link('help/faq', $question) }}">{{ highlight($question.question, $options.term) }}</a>
+			</h3>
+
+			<div class="contentRow-snippet">{{ snippet($question.answer, 300, {'term': $options.term, 'stripQuote': true}) }}</div>
+
+			<div class="contentRow-minor contentRow-minor--hideLinks">
+				<ul class="listInline listInline--bullet">
+					<xf:if is="$options.mod == 'question' && $question.canUseInlineModeration()">
+						<li><xf:checkbox standalone="true"><xf:option value="{$question.faq_id}" class="js-inlineModToggle" /></xf:checkbox></li>
+					</xf:if>
+					<li><xf:username user="{$question.User}" defaultname="{$question.username}" /></li>
+					<li>{{ phrase('faq_question') }}</li>
+					<li><xf:date time="{$question.answer_date}" /></li>
+					<li>{{ phrase('category:') }} category</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</li>

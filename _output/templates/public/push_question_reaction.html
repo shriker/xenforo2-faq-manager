@@ -1,0 +1,7 @@
+{{ phrase('faq_x_reacted_to_answer_y', {
+	'name': $user.username ?: $alert.username,
+	'reaction': reaction_title($extra.reaction_id),
+	'title': $content.question
+}) }}
+<push:url>{{ link('canonical:help/faq', $content) }}</push:url>
+<push:tag>question_reaction_{$content.faq_id}_{$extra.reaction_id}</push:tag>

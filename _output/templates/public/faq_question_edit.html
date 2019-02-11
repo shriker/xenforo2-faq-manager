@@ -1,0 +1,38 @@
+<xf:title>{{ phrase('edit_question') }}</xf:title>
+
+<xf:form action="{{ link('help/faq/edit', $question) }}" ajax="true" class="block"
+		 data-xf-init="attachment-manager"
+		 data-preview-url="{{ link('help/faq/preview', $question) }}">
+	<div class="block-container">
+		<div class="block-body">
+			<span class="u-anchorTarget js-editContainer"></span>
+
+			<xf:textboxrow name="question" value="{$question.question}" rowtype="{{ $quickEdit ? 'fullWidth' : '' }}"
+						   maxlength="{{ max_length($question, 'question') }}"
+						   label="{{ phrase('faq_question') }}" />
+
+			<xf:editorrow name="answer" value="{{ $question.answer }}"
+						  attachments="{$attachmentData.attachments}"
+						  rowtype="{{ $quickEdit ? 'fullWidth noLabel' : '' }}"
+						  data-min-height="100"
+						  label="{{ phrase('faq_answer') }}" />
+
+			<xf:formrow rowtype="{{ $quickEdit ? 'fullWidth noLabel' : '' }}">
+				<xf:if is="$attachmentData">
+					<xf:macro template="helper_attach_upload" name="upload_block" arg-attachmentData="{$attachmentData}" />
+				</xf:if>
+				<xf:button class="button--link u-jsOnly" data-xf-click="preview-click" icon="preview" />
+			</xf:formrow>
+
+		</div>
+		<xf:submitrow icon="save" sticky="true" rowtype="{{ $quickEdit ? 'simple' : '' }}">
+			<xf:html>
+				<xf:button class="u-jsOnly" data-xf-click="preview-click" icon="preview" />
+				<xf:if is="$quickEdit">
+					<xf:button class="js-cancelButton">{{ phrase('button.cancel') }}</xf:button>
+				</xf:if>
+			</xf:html>
+		</xf:submitrow>
+
+	</div>
+</xf:form>
