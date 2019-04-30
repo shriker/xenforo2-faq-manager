@@ -1,5 +1,8 @@
 <xf:title>{{ phrase('edit_question') }}</xf:title>
 
+<xf:breadcrumb href="{{ link('help') }}">{{ phrase('help') }}</xf:breadcrumb>
+<xf:breadcrumb href="{{ link('help/faq') }}"> {{ phrase('help_page_title.faq') }}</xf:breadcrumb>
+
 <xf:form action="{{ link('help/faq/edit', $question) }}" ajax="true" class="block"
 		 data-xf-init="attachment-manager"
 		 data-preview-url="{{ link('help/faq/preview', $question) }}">

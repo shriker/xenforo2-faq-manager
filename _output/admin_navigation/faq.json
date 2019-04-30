@@ -1,0 +1,10 @@
+{
+    "parent_navigation_id": "help",
+    "display_order": 200,
+    "link": "faq-manager",
+    "icon": "fa-question",
+    "admin_permission_id": "faqManager",
+    "debug_only": false,
+    "development_only": false,
+    "hide_no_children": false
+}

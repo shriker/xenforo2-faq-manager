@@ -1,0 +1,11 @@
+{
+    "route_type": "admin",
+    "route_prefix": "faq-manager",
+    "sub_name": "",
+    "format": ":int<faq_id,question>/",
+    "build_class": "",
+    "build_method": "",
+    "controller": "Shriker\\Faq:Question",
+    "context": "faq",
+    "action_prefix": ""
+}

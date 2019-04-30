@@ -22,6 +22,14 @@ class Question extends Repository
         return $questionFinder;
     }
 
+    /**
+     * Questions for admin list
+     */
+    public function findQuestionsForList()
+    {
+        return $this->finder('Shriker\Faq:Question');
+    }
+
     public function sendModeratorActionAlert(\Shriker\Faq\Entity\Question $update, $action, $reason = '', array $extra = [])
 	{
 		$question = $update->Question;
@@ -44,7 +52,7 @@ class Question extends Repository
 		$alertRepo->alert(
 			$question->User,
 			0, '',
-			'user', $resource->user_id,
+			'user', $question->user_id,
 			"question_{$action}", $extra
 		);
 

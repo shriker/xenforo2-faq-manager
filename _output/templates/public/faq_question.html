@@ -1,6 +1,5 @@
 <xf:title>{{ $question.question }}</xf:title>
 
-
 <xf:set var="$descSnippet" value="{{ snippet($question.answer, 250, {'stripBbCode': true}) }}" />
 
 <xf:macro template="metadata_macros" name="metadata"
@@ -58,7 +57,7 @@
 							</li>
 							<xf:if is="!$hidePosition">
 								<li>
-									<a href="{{ link('help/faq', $question, {'faq_id': $question.faq_id}) }}" rel="nofollow">
+									<a href="{{ link('help/faq', $question) }}" rel="nofollow">
 										#{{ number($question.faq_id) }}
 									</a>
 								</li>
@@ -86,6 +85,15 @@
 									</xf:contentcheck>
 								</div>
 							</xf:if>
+							
+							<div class="actionBar-set actionBar-set--internal">
+								<a href="{{ link('help/faq/edit', $question) }}"
+								   class="actionBar-action actionBar-action--edit actionBar-action--menuItem"
+								   data-xf-click="quick-edit"
+								   data-editor-target="#js-question-{$question.faq_id} .js-quickEditTarget"
+								   data-menu-closer="true">{{ phrase('edit') }}</a>
+							</div>
+							
 						</div>
 						<div class="reactionsBar js-reactionsList {{ $question.reactions ? 'is-active' : '' }}">
 							<xf:reactions content="{$question}" link="help/faq/reactions" />

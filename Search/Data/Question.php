@@ -24,11 +24,19 @@ class Question extends AbstractData
 
 	public function getIndexData(Entity $entity)
 	{
+        if (!$entity->Question)
+		{
+			return null;
+		}
+
+		/** @var \Shriker\Faq\Entity\Question $question */
+        $question = $entity->Question;
+
 		$index = IndexRecord::create('question', $entity->faq_id, [
 			'title' => $entity->question,
 			'message' => $entity->answer,
 			'date' => $entity->answer_date,
-			'user_id' => $entity->user_id,
+			'user_id' => $question->user_id,
 			'discussion_id' => $entity->faq_id,
 			'metadata' => [
                 'question' => $entity->faq_id
@@ -68,7 +76,7 @@ class Question extends AbstractData
 
 	public function canUseInlineModeration(Entity $entity, &$error = null)
 	{
-		/** @var \XFRM\Entity\ResourceItem $entity */
+		/** @var \Shriker\Faq\Entity\Question $entity */
 		return $entity->canUseInlineModeration($error);
 	}
 
@@ -99,14 +107,6 @@ class Question extends AbstractData
 	public function getSearchFormData()
 	{
 		return [];
-	}
-
-	protected function getSearchableCategoryTree()
-	{
-	}
-
-	protected function getPrefixListData()
-	{
 	}
 
 	public function applyTypeConstraintsFromInput(\XF\Search\Query\Query $query, \XF\Http\Request $request, array &$urlConstraints)

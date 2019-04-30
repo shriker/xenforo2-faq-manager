@@ -58,8 +58,6 @@ class Question extends AbstractController
         $finder = $repo->findQuestionsForOverview()->whereId($params->faq_id);
         $question = $finder->fetchOne();
 
-        //\XF::dump($question);
-
         $viewParams = [
             'question' => $question,
             'pages' => $this->repository('XF:HelpPage')->findActiveHelpPages(),
@@ -67,7 +65,7 @@ class Question extends AbstractController
         ];
 
         $this->assertCanonicalUrl($this->buildLink('help/faq', $question));
-        return $this->view('Shriker\Faq::Question\View', 'faq_question', $viewParams);
+        return $this->view('Shriker\Faq:Question\View', 'faq_question', $viewParams);
     }
 
     public function actionAsk(ParameterBag $params)
@@ -209,6 +207,19 @@ class Question extends AbstractController
         );
     }
     */
+
+    public function actionShare(ParameterBag $params)
+	{
+		$question = $this->assertQuestionExists($params->faq_id);
+
+		/** @var \XF\ControllerPlugin\Share $sharePlugin */
+		$sharePlugin = $this->plugin('XF:Share');
+		return $sharePlugin->actionTooltip(
+            $this->buildLink('canonical:help/faq', $question),
+            $question->question,
+            \XF::phrase('share_this_question')
+		);
+	}
 
     public function actionReact(ParameterBag $params)
 	{
